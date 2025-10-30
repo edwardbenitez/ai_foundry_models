@@ -45,7 +45,7 @@ resource "azurerm_cognitive_account" "ai_foundry" {
 
 ## Create a deployment for OpenAI's GPT-4o in the AI Foundry resource
 ##
-resource "azurerm_cognitive_deployment" "aifoundry_deploy_gpt5_mini" {
+resource "azurerm_cognitive_deployment" "gpt5_mini" {
   depends_on = [
     azurerm_cognitive_account.ai_foundry
   ]
@@ -66,7 +66,7 @@ resource "azurerm_cognitive_deployment" "aifoundry_deploy_gpt5_mini" {
 
 #add permissions at deployment level
 resource "azurerm_role_assignment" "rbac-ai-user" {
-  scope                = azurerm_cognitive_deployment.aifoundry_deploy_gpt5_mini.id
+  scope                = azurerm_cognitive_deployment.gpt5_mini.id
   role_definition_name = "Azure AI User"
   principal_id         = data.azurerm_client_config.current.object_id
 }

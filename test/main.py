@@ -15,7 +15,9 @@ def main():
     load_dotenv()
     logger.info("Environment variables loaded.")
     ENDPOINT = os.getenv("endpoint")
+    MODEL_NAME = os.getenv("model_name")
     logger.info(f"Using endpoint: {ENDPOINT}")
+    logger.info(f"Using model: {MODEL_NAME}")
     token_provider = get_bearer_token_provider(
         DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
     )
@@ -26,8 +28,9 @@ def main():
     )
 
     response = client.responses.create(
-        model="gpt-5-nano",
-        input= "what are you?" 
+        model=MODEL_NAME,
+        reasoning={"effort": "minimal"},
+        input= "what are you?"
     )
 
     print(response.model_dump_json(indent=2))
