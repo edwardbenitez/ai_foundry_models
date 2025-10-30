@@ -16,7 +16,7 @@ crash.*.log
 terraform.rc
 
 # Sensitive variable files
-*.tfvars
+
 *.tfvars.json
 *.tfvars.yaml
 *.auto.tfvars
