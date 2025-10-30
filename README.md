@@ -19,15 +19,10 @@ terraform plan -out plan1
 terraform apply plan1
 ```
 
-## Configurations - custom analyzer
 
-Open the config/create.sh file and update the endpoint with the the ai_service_endpoint that was displayed after applying the terraform plan.
+## Test - use the model endpoint
 
-## SRC - extract information
-
-Update the .env ENDPOINT variable file with the the ai_service_endpoint that was displayed after applying the terraform plan
-
-To send the image "src/r2.jpg" to the content understanding run the following commands
+Update the .env variables, the required values were displayed after applying the terraform plan
 
 ```sh
 cd test
