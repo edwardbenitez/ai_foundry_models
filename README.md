@@ -1,26 +1,39 @@
 # Description
-Deploying model on foundry
 
-# techincal details
-one creating an cognitive service kind "AIServices" you are creating an AI foundry resource
-you can create projects but this projects are directly connected to the AI foundry resources
-so you cannot isolate them at least in this TPU model deployment (the standard one and recommended)
-there are other 2 deployment options
-Deployment to serverless API endpoints in Azure AI Hub resources
-Deployment to managed computes in Azure AI Hub resources
-this other two requires using hubs that will under the hood
+## Prerequisites
 
-openai models require the ai foundry resource to deploy over there, in case you are using hubs you need to connect the AI resource to your hub.
-the advantage of the hubs is you can also deploy hugging face models
+- azure cli installed
+- login on azure cli
 
-using the normal TPU model deployment you can also deploy other models like grok whoithout the need of hubs. you can choose between 122 models
+## IAC - azure resources
 
-setup permissions via RBAC or API KEY
+Update the dev.tfvars with the prefix the resources will have and the location where the resources will be created.
 
-for this you assign the AI developer role over the AI foundry resource
+```sh
+cd iac
 
----projects shoud isolate the access to the models but they are not
-instead you allow access via RBAC, all models are visible for the users
+terrraform init
 
-# test it is working as expected
-run test
+terraform plan -out plan1
+
+terraform apply plan1
+```
+
+## Configurations - custom analyzer
+
+Open the config/create.sh file and update the endpoint with the the ai_service_endpoint that was displayed after applying the terraform plan.
+
+## SRC - extract information
+
+Update the .env ENDPOINT variable file with the the ai_service_endpoint that was displayed after applying the terraform plan
+
+To send the image "src/r2.jpg" to the content understanding run the following commands
+
+```sh
+cd test
+
+uv sync
+
+uv run main.py
+
+```
